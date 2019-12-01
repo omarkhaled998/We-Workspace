@@ -4,7 +4,11 @@ const app=express();
 const mongoose = require('mongoose');
 require('dotenv/config');
 
+////import routes
+const roomsRoute = require('./routes/room');
 
+
+app.use('/room',roomsRoute);
 
 ///routes 
 app.get('/',(req,res) =>{
