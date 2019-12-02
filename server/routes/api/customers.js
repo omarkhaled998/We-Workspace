@@ -38,13 +38,23 @@ router.get("/", async (req, res) => {
         return res
           .status(400)
           .send({ error: isValidated.error.details[0].message });
-      const newCustomer = await Customer.create(req.body);
+      
+          const newCustomer = await Customer.create(req.body);
       res.json({ msg: "customer was created successfully", data: newCustomer });
     } catch (error) {
       console.log(error);
       return res.status(400).send("Error");
     }
   });
+
+
+
+
+
+
+
+
+
   router.put("/:id", async (req, res) => {
     try {
       if (ObjectId.isValid(req.params.id)) {

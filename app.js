@@ -12,7 +12,7 @@ const customersRoute = require('./server/routes/api/customers');
 
 
 app.use(bodyParser.json());
-
+app.use(express.json());
 app.use('/customer',customersRoute);
 app.use('/room',roomsRoute);
 
@@ -26,11 +26,11 @@ app.use('/room',roomsRoute);
      
 });
 
+const db = require('./server/config/config').MongoUri;
 
 //connect to db
-mongoose.connect(process.env.DB_CONNECTION,
-{useNewUrlParser:true},
-() => console.log('connected to DB !!'));
+mongoose.connect(db).then(()=>console.log('connected to DB !!')).catch(err => console.log(err));
+
 
 
 ///listen to the server
