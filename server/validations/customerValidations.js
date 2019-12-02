@@ -7,7 +7,7 @@ module.exports = {
             firstName: Joi.string().required(),
             lastName: Joi.string().required(),
             SSN: Joi.number().required(),
-            birthDate: Joi.date().required(),
+            //birthDate: Joi.date().required(),
             gender: Joi.boolean().required(),
             nationality: Joi.string().min(3).max(100).required().regex(/^([^0-9]*)$/),
            

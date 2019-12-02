@@ -1,7 +1,8 @@
 const express = require('express');
-
 const app=express();
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+
 require('dotenv/config');
 require('./server/models/Room');
 
@@ -10,6 +11,7 @@ const roomsRoute = require('./server/routes/api/rooms');
 const customersRoute = require('./server/routes/api/customers');
 
 
+app.use(bodyParser.json());
 
 app.use('/customer',customersRoute);
 app.use('/room',roomsRoute);

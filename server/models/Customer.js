@@ -1,8 +1,7 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema
 
 // Create the schema
-const CustomerSchema = new Schema({
+const CustomerSchema = mongoose.Schema({
     firstName: {
         type: String,
         required: true
@@ -17,7 +16,7 @@ const CustomerSchema = new Schema({
     },
     birthDate: {
         type: Date,
-        required: true
+        required: false
     }, 
     gender: {
         type: Boolean,
@@ -48,4 +47,4 @@ const CustomerSchema = new Schema({
 
 })
 
-module.exports = Customer = mongoose.model('customers', CustomerSchema)
+module.exports = mongoose.model('Customers', CustomerSchema)
