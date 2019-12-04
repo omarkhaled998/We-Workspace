@@ -1,13 +1,16 @@
-FROM node:10
+FROM alpine:latest
 
-WORKDIR /the/workdir/path
+RUN apk add --no-cache nodejs npm
 
-COPY packqge*.json ./
+WORKDIR /app
+
+COPY . /app
 
 RUN npm install
 
-COPY . .
-
 EXPOSE 3000
 
-CMD ["node","app.js"]
+ENTRYPOINT ["node"]
+
+CMD ["app.js"]
+
