@@ -1,13 +1,13 @@
-from node:10
+FROM node:10
 
 WORKDIR /the/workdir/path
 
 COPY packqge*.json ./
 
-run npm install
+RUN npm install
 
-copy . .
+COPY . .
 
 EXPOSE 3000
 
-cmd ["node","app.js"]
+CMD ["node","app.js"]
