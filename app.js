@@ -3,7 +3,7 @@ const app=express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-require('dotenv/config');
+require('dotenv').config();
 require('./server/models/Room');
 
 ////import routes
@@ -26,12 +26,20 @@ app.use('/room',roomsRoute);
      
 });
 
-const db = require('./server/config/config').MongoUri;
+ const db = process.env.MongoUri2;
+ console.log(db);
 
-//connect to db
-mongoose.connect(db).then(()=>console.log('connected to DB !!')).catch(err => console.log(err));
+// //connect to db
+// mongoose.connect(db, { useNewUrlParser: true ,useUnifiedTopology: true })
+// .then(()=>console.log('connected to DB !!'))
+// .catch(err => console.log(err));
 
+mongoose.Promise = global.Promise;
+// Mongoose Connect
+mongoose.connect(db, {useNewUrlParser: true,useUnifiedTopology: true})
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.log(err));
 
 
 ///listen to the server
-app.listen(3000);
+app.listen(3000,()=> console.log("server is running"));
