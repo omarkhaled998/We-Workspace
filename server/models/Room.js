@@ -11,6 +11,13 @@ const RoomSchema = new Schema({
         type: Number,
         required: true
     },
+    reservations: {
+        type : Array,
+        required: false,
+        default:[[]]
+
+    }
+
 })
 
 module.exports = Room = mongoose.model('rooms', RoomSchema)

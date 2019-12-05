@@ -6,6 +6,7 @@ module.exports = {
             //persinal info
             capacity: Joi.number().required(),
             roomNumber: Joi.number().required(),
+            reservations: Joi.array()
             
         }
 
@@ -16,7 +17,7 @@ module.exports = {
         const updateSchema = {
             firstName: Joi.number(),
             lastName: Joi.number(),
-           
+            reservations: Joi.array(),
         }
 
         return Joi.validate(request, updateSchema)
