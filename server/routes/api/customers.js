@@ -107,6 +107,21 @@ router.get("/allRooms", async (req, res) => {
 });
 
 
+//as a customer i want to view a room with specific id 
+
+router.get("/room/:id", async (req, res) => {
+
+  if (ObjectId.isValid(req.params.id)) {
+    const id = req.params.id;
+    const room = await Room.findById(id);
+    if (room) {
+      res.json({ data: room });
+    } else {
+      return res.status(404).send({ error: "No room with this id" });
+    }
+  } else return res.status(404).send({ error: "ID ERROR" });
+});
+
 //as a customer i want to reserve a room
 router.get("/roomreserve/:id",async (req, res)=>{
   const roomId = req.params.id;
