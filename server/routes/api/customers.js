@@ -112,37 +112,58 @@ router.get("/roomreserve/:id",async (req, res)=>{
   const roomId = req.params.id;
   var flag = false ;
   var c = 0;
-  const startDate = new Date('2019-12-17T03:24:00');
-  const endDate = new Date('2019-12-17T05:24:00');
+  const startDate = new Date('November 12, 2017 03:24:00');
+  console.log(startDate);
+  
+  const endDate = new Date('November 12, 2017 05:24:00');
   if(ObjectId.isValid(roomId)){
     const room = await Room.findById(roomId);
     if(room){
 
-      for( i=0 ; i<room.reservations.length && (flag == false) ; i++){
+      for( i=0 ; i<room.reservations.length ; i++){
+
       //   if((startDate.getDay() === room.reservations[i][0].getDay() && startDate.getFullYear() === room.reservations[i][0].getFullYear() && startDate.getHours() >=  ) )
 
       // }
-        console.log(room.reservations[i][0]);
-      if( ( (startDate.getTime()>= room.reservations[i][0].getTime()) && (startDate.getTime()<= room.reservations[i][1]).getTime() ) || ( (endDate.getTime()>= room.reservations[i][0].getTime()) && (endDate.getTime()<= room.reservations[i][1]).getTime() )  )
-        flag = true;
-      c = i;  
+        //console.log(room.reservations[i][0]);
+        //var loop2= room.reservations[i].length;
+       // console.log(room.reservations[i]);
+       console.log('ana hena');
+      //  console.log(endDate);
+      //  console.log(room.reservations[i][0]);
+      //  console.log(endDate>=room.reservations[i][0])
+      //  console.log(room.reservations[i][1]);
+       
+        if( ( (startDate >= room.reservations[i][0]) && (startDate<= room.reservations[i][1]) ) || ( (endDate >= room.reservations[i][0]) && (endDate <= room.reservations[i][1]) ) ||((startDate<=room.reservations[i][0])&&(endDate>=room.reservations[i][1]))  ){
+          
+          flag = true;
+        }
+        c +=1 ;  
 
 
     }
-    if(flag == false){
-    //  console.log(c);
-      //console.log(room);
-      room.reservations[c][0].push(startDate);
-      room.reservations[c][1].push(endDate);
-      //console.log(room);
-      res.json({ data: room });
-    }
-    else
-      console.log("already reserved");
+    
 
   }
+    console.log(flag);
+    if(flag == false){
+      console.log(c);
+      //console.log(room);
+      
+      room.reservations[c] = ([startDate,endDate]);
+    //  console.log(room.reservations[c]);
+      //room.reservations[c][1].push(endDate);
 
-}});
+     //console.log(room.reservations[c][0] +'---------------------------'+room.reservations[c][1]);
+      //console.log(room);
+      
+    }
+    else
+      console.log('already reserved');
+    res.json({ data: room });
+  }
+
+});
 
 module.exports = router ; 
 

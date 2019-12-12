@@ -14,7 +14,7 @@ const RoomSchema = new Schema({
     reservations: {
         type : Array,
         required: false,
-        default:[[]]
+        default:[[new Date('2017-11-11T03:24:00'),new Date('2017-11-11T05:24:00')]]
 
     }
 
